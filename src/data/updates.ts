@@ -13,6 +13,19 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.3.0",
+    date: "October 27, 2026",
+    title: "Homepage: a clinician's day, money leaks, lab board and clearer answers",
+    kind: "improvement",
+    items: [
+      { kind: "improvement", text: "The homepage now moves between deep dark, clean white and soft grid backgrounds, so each part feels distinct as you scroll." },
+      { kind: "improvement", text: "New live-style boards show the front desk queue, dental lab cases with due dates, and eye prescriptions side by side." },
+      { kind: "improvement", text: "A money section shows unpaid balances, profit per treatment and clinician splits, with a switch between daily cash and lab costs." },
+      { kind: "improvement", text: "A clinic-to-lab board shows scan file transfers, lab messages and what each staff role can see." },
+      { kind: "improvement", text: "Clinic stories now lead with the result, questions are grouped into four topics, and the final section offers a 15-minute walkthrough or a WhatsApp chat." },
+    ],
+  },
+  {
     version: "v2.2.9",
     date: "October 27, 2026",
     title: "Homepage opening photo",

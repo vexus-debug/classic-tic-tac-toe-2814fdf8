@@ -1,107 +1,78 @@
 import { motion } from "framer-motion";
-import { Lock, CheckCircle2, Users, Activity } from "lucide-react";
+import { FileBox, MessageSquare, ShieldCheck, CheckCircle2 } from "lucide-react";
+
+const files = [
+  { name: "upper_arch_26.stl", size: "18.4 MB", state: "Received by lab", pct: 100 },
+  { name: "lower_arch_bite.stl", size: "16.9 MB", state: "Uploading", pct: 64 },
+];
+
+const thread = [
+  { who: "Lab Tech · Bridgeway", text: "Shade A2 confirmed. Zirconia crown milling tomorrow.", mine: false },
+  { who: "Dr. Adeyemi", text: "Thanks — patient booked for fitting on Friday.", mine: true },
+];
+
+const roles = [
+  { role: "Receptionist", sees: "Queue, bookings, payments" },
+  { role: "Clinician", sees: "Charts, notes, prescriptions" },
+  { role: "Lab Tech", sees: "Assigned cases & files only" },
+  { role: "Clinic Owner", sees: "Everything, incl. financials" },
+];
 
 const CollaborateSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[hsl(var(--medical-blue-dark))] py-20 md:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-muted/20" />
+    <section className="site-band-ink relative overflow-hidden py-24 md:py-32">
       <div className="container relative z-10">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          {/* Left: Visual */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative order-2 lg:order-1"
-          >
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-5 flex items-center gap-4">
-                <div className="h-16 w-16 rounded-full bg-muted/20 ring-4 ring-white/10" />
-                <div>
-                  <div className="h-3 w-28 rounded-full bg-white/20" />
-                  <div className="mt-2 h-2.5 w-20 rounded-full bg-white/10" />
-                </div>
-              </div>
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="max-w-2xl">
+          <span className="site-eyebrow block">Clinic-to-lab coordination</span>
+          <h2 className="mt-4 text-3xl text-foreground md:text-4xl">
+            One board for the clinic and the lab. Nothing lost on WhatsApp.
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Send scans, agree on shade and due dates, and keep every staff member inside the part of
+            the system that matches their job.
+          </p>
+        </motion.div>
 
-              <div className="space-y-3">
-                {[
-                  { label: "Dr. Adeyemi completed dental chart", time: "2 min ago" },
-                  { label: "Lab case #412 marked as ready", time: "5 min ago" },
-                  { label: "Receptionist booked walk-in patient", time: "8 min ago" },
-                  { label: "Invoice #1084, payment received", time: "15 min ago" },
-                ].map((item) => (
-                  <div key={item.label} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-3">
-                    <div className="flex items-center gap-3">
-                      <div className="h-2 w-2 rounded-full bg-[hsl(var(--medical-teal))]" />
-                      <span className="text-sm text-white/90">{item.label}</span>
-                    </div>
-                    <span className="text-[11px] text-white/40">{item.time}</span>
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45 }} className="rounded-md border border-border/60 bg-card p-6">
+            <h3 className="flex items-center gap-2 text-base text-foreground"><FileBox className="h-4 w-4 text-primary" /> Digital scan transfer</h3>
+            <ul className="mt-4 space-y-4">
+              {files.map((f) => (
+                <li key={f.name}>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="truncate font-mono text-xs text-foreground">{f.name}</span>
+                    <span className="text-[11px] text-muted-foreground">{f.size}</span>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="absolute -right-3 -top-3 rounded-xl border border-white/10 bg-[hsl(var(--medical-blue-dark))] px-4 py-3"
-            >
-              <div className="flex items-center gap-2">
-                <Activity className="h-4 w-4 text-[hsl(var(--medical-teal))]" />
-                <div>
-                  <div className="text-xs font-bold text-white">9 Roles</div>
-                  <div className="text-[10px] text-white/50">Access Control</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="absolute -bottom-3 -left-3 rounded-xl border border-white/10 bg-[hsl(var(--medical-blue-dark))] px-4 py-3"
-            >
-              <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-[hsl(var(--medical-teal))]" />
-                <div>
-                  <div className="text-xs font-bold text-white">Full Audit Log</div>
-                  <div className="text-[10px] text-white/50">Every Action Tracked</div>
-                </div>
-              </div>
-            </motion.div>
+                  <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-muted">
+                    <motion.div initial={{ width: 0 }} whileInView={{ width: `${f.pct}%` }} viewport={{ once: true }} transition={{ duration: 1 }} className="h-full bg-primary" />
+                  </div>
+                  <span className="mt-1 flex items-center gap-1 text-[11px] text-muted-foreground">
+                    {f.pct === 100 && <CheckCircle2 className="h-3 w-3 text-primary" />}{f.state}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </motion.div>
 
-          {/* Right: Text */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="order-1 lg:order-2"
-          >
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-              <Lock className="h-6 w-6 text-[hsl(var(--medical-teal))]" />
-            </div>
-            <h2 className="mb-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
-              Software That Understands Who Is in the Room
-            </h2>
-            <p className="mb-6 text-lg leading-relaxed text-white/60">
-              A dentist never sees ophthalmology fields. An optometrist never navigates hospital inpatient forms. Every specialist works with the tools their discipline demands, and nothing else.
-            </p>
-            <ul className="space-y-3">
-              {[
-"Roles shaped by each specialty, from dentist to optometrist",
-"Your data locked down, record by record",
-"Every action logged, so nothing goes unaccounted for",
-"Talk to your team without a single WhatsApp group",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-white">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[hsl(var(--medical-teal))]" />
-                  <span className="font-medium">{item}</span>
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.08 }} className="rounded-md border border-border/60 bg-card p-6">
+            <h3 className="flex items-center gap-2 text-base text-foreground"><MessageSquare className="h-4 w-4 text-primary" /> Case LAB 118 · thread</h3>
+            <ul className="mt-4 space-y-3">
+              {thread.map((m) => (
+                <li key={m.text} className={`max-w-[90%] rounded-md border border-border/60 p-3 ${m.mine ? "ml-auto bg-primary/15" : "bg-muted"}`}>
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{m.who}</div>
+                  <p className="mt-1 text-sm text-foreground">{m.text}</p>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.16 }} className="rounded-md border border-border/60 bg-card p-6">
+            <h3 className="flex items-center gap-2 text-base text-foreground"><ShieldCheck className="h-4 w-4 text-primary" /> Role-based access</h3>
+            <ul className="mt-4 divide-y divide-border/60">
+              {roles.map((r) => (
+                <li key={r.role} className="flex items-center justify-between gap-3 py-3">
+                  <span className="rounded-sm border border-primary/40 px-2 py-0.5 text-[11px] font-semibold text-primary">{r.role}</span>
+                  <span className="text-right text-xs text-muted-foreground">{r.sees}</span>
                 </li>
               ))}
             </ul>
